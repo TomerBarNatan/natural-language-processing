@@ -8,7 +8,7 @@
             "name": "q2c test",
             "type": "python",
             "request": "launch",
-            "program": "C:\\Users\\tomer\\PycharmProjects\\NLP\\Assignment_1\\q2c_word2vec.py",
+            "program": "C:\\Users\\tomer\\PycharmProjects\\NLP\\Assignment_1\\q2e_run.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
