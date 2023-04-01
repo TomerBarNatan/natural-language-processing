@@ -12,10 +12,10 @@ def softmax(x):
     x -- You are allowed to modify x in-place
     """
     orig_shape = x.shape
-
+    print(orig_shape)
     if len(x.shape) > 1:
         x -= np.max(x, axis=1, keepdims=True)
-        x = np.exp(x) / np.sum(np.exp(x), axis = 1)
+        x = np.exp(x) / np.sum(np.exp(x), axis=1)
     else:
         x -= np.max(x)
         x = np.exp(x) / np.sum(np.exp(x))
@@ -57,11 +57,13 @@ def your_softmax_test():
     This function will not be called by the autograder, nor will
     your tests be graded.
     """
-    
+
     print("Running your tests...")
-    ### YOUR OPTIONAL CODE HERE
-    pass
-    ### END YOUR CODE
+    vector1 = np.array([6.0, 3.0])
+    test1 = softmax(vector1)
+    ans1 = np.array([0.95257413, 0.04742587])
+    assert np.allclose(test1, ans1, rtol=1e-05, atol=1e-06)
+    # END YOUR CODE
 
 
 if __name__ == "__main__":
