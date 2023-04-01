@@ -42,7 +42,7 @@ def gradcheck_naive(f, x, gradient_text=""):
         random.setstate(rndstate)
         fxn_mh, _ = f(x)
         x[ix] += h
-        numgrad = (fx_ph - fxn_mh) / 2 / h
+        numgrad = (fx_ph - fxn_mh) / (2 * h)
         
         # Compare gradients
         assert_allclose(numgrad, grad[ix], rtol=1e-5,

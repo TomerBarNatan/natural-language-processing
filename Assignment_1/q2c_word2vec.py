@@ -38,13 +38,14 @@ def naive_softmax_loss_and_gradient(
     """
     all_probs = softmax(outside_vectors @ center_word_vec)
 
-    loss = all_probs[outside_word_idx]
+    loss = -np.log(all_probs[outside_word_idx])
 
-    expectation = np.sum(np.expand_dims(all_probs,axis=1) * outside_vectors, axis=0)
-    grad_center_vec = outside_vectors[outside_word_idx] - expectation
+    y_diff = all_probs.copy()
+    y_diff[outside_word_idx] -= 1
+    
+    grad_center_vec = outside_vectors.T @ y_diff
 
-    all_probs[outside_word_idx] -= 1
-    grad_outside_vecs = np.expand_dims(all_probs, axis=1) @ np.expand_dims(center_word_vec, axis=0)
+    grad_outside_vecs = np.expand_dims(y_diff, axis=1) @ np.expand_dims(center_word_vec, axis=0)
     return loss, grad_center_vec, grad_outside_vecs
 
 
@@ -86,8 +87,8 @@ def neg_sampling_loss_and_gradient(
 
     grad_outside_vecs = np.zeros(shape=outside_vectors.shape)
     grad_outside_vecs[outside_word_idx] = -(1 - pos_prob) * center_word_vec
-    for i in neg_sample_word_indices:
-        grad_outside_vecs[i] += (1 - neg_sample_probs[i]) * center_word_vec
+    for i, sample in enumerate(neg_sample_word_indices):
+        grad_outside_vecs[sample] += (1 - neg_sample_probs[i]) * center_word_vec
     return loss, grad_center_vec, grad_outside_vecs
 
 
@@ -121,16 +122,18 @@ def skipgram(current_center_word, outside_words, word2ind,
     grad_outside_vectors -- the gradient with respect to the outside word vectors
                         (dJ / dU in the pdf handout)
     """
+    loss = 0.0
+    grad_center_vecs = np.zeros(center_word_vectors.shape)
+    grad_outside_vectors = np.zeros(outside_vectors.shape)
 
     center_ind = word2ind[current_center_word]
     center_word_vec = center_word_vectors[center_ind]
     outside_word_indexes = list(map(lambda w: word2ind[w], outside_words)) 
     for outside_word_idx in outside_word_indexes:
         curr_loss, curr_grad_center_vec, curr_grad_outside_vecs = word2vec_loss_and_gradient(center_word_vec=center_word_vec,outside_word_idx=outside_word_idx,outside_vectors=outside_vectors,dataset=dataset)
-    loss = 0.0
-    grad_center_vecs = np.zeros(center_word_vectors.shape)
-    grad_outside_vectors = np.zeros(outside_vectors.shape)
-
+        loss+=curr_loss
+        grad_center_vecs[center_ind] += curr_grad_center_vec
+        grad_outside_vectors+=curr_grad_outside_vecs
 
 
     return loss, grad_center_vecs, grad_outside_vectors
