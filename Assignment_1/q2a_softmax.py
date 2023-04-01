@@ -12,7 +12,6 @@ def softmax(x):
     x -- You are allowed to modify x in-place
     """
     orig_shape = x.shape
-    print(orig_shape)
     if len(x.shape) > 1:
         x -= np.max(x, axis=1, keepdims=True)
         x = np.exp(x) / np.sum(np.exp(x), axis=1)

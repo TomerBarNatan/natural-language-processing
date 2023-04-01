@@ -35,10 +35,12 @@ def gradcheck_naive(f, x, gradient_text=""):
         # before calling f(x) each time. This will make it possible
         # to test cost functions with built in randomness later.
 
-        ### YOUR CODE HERE:
-        raise NotImplementedError
-        ### END YOUR CODE
-
+        random.setstate(rndstate)
+        fx_ph, _ = f(x[ix] + h)
+        random.setstate(rndstate)
+        fx_mh, _ = f(x[ix] - h)
+        
+        numgrad = (fx_ph - fx_mh) / (2 * h)
         # Compare gradients
         assert_allclose(numgrad, grad[ix], rtol=1e-5,
                         err_msg=f"Gradient check failed for {gradient_text}.\n"
