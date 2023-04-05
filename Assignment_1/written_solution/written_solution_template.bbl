@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{Goldberg2014word2vecED}
+Y.~Goldberg and O.~Levy.
+\newblock word2vec explained: deriving mikolov et al.'s negative-sampling
+  word-embedding method.
+\newblock {\em ArXiv}, abs/1402.3722, 2014.
+
+\bibitem{Levy2014Factorization}
+O.~Levy and Y.~Goldberg.
+\newblock Neural word embedding as implicit matrix factorization.
+\newblock In Z.~Ghahramani, M.~Welling, C.~Cortes, N.~Lawrence, and
+  K.~Weinberger, editors, {\em Advances in Neural Information Processing
+  Systems}, volume~27. Curran Associates, Inc., 2014.
+
+\end{thebibliography}

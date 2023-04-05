@@ -4,8 +4,11 @@
 \usepackage{lastpage}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{bm}
+\usepackage{csquotes}
+\usepackage{mymacros}
 
 \usepackage[shortlabels]{enumitem}
 \usepackage[noabbrev, capitalise]{cleveref}
@@ -20,13 +23,14 @@
  }
 
 % define your IDs here:
-\newcommand{\firststudentid}{123456789}
+\newcommand{\firststudentid}{318635646}
 \newcommand{\secondstudentid}{987654321}
+\newcommand{\thirdstudentid}{987654321}
 
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Written Solution for Assignment 1}
-\chead{\firststudentid \qquad \secondstudentid}
+\chead{\firststudentid \qquad \secondstudentid \qquad \thirdstudentid}
 \lhead{Natural Language Processing}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 \renewcommand{\footrulewidth}{1pt}
@@ -43,25 +47,30 @@
 \refstepcounter{section}
 \section{Understanding word2vec}
 \subsection{}
-YOUR ANSWER HERE
+\input{q1/1_a.tex}
+
 \subsection{}
-YOUR ANSWER HERE
+\input{q1/1_b.tex}
+
 \subsection{}
-YOUR ANSWER HERE
+\input{q1/1_c.tex}
+
 \subsection{}
-YOUR ANSWER HERE
+\input{q1/1_d.tex}
+
 \subsection{}
-YOUR ANSWER HERE
-\refstepcounter{subsection}
-\subsubsection{}
-YOUR ANSWER HERE
-\subsubsection{}
-YOUR ANSWER HERE
-\subsubsection{}
-YOUR ANSWER HERE
+\input{q1/1_e.tex}
+
+\subsection{}
+\input{q1/1_f.tex}
+
 \section{Implementing word2vec}
 \setcounter{subsection}{4}
 \subsection{}
 YOUR ANSWER HERE
+
+\newpage
+\bibliography{main}
+\bibliographystyle{abbrv}
 
 \end{document}

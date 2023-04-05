@@ -1,1 +1,8 @@
 Assignment_1/get_data.sh
+Assignment_1/written_solution/*.fdb_latexmk
+Assignment_1/written_solution/*.aux
+Assignment_1/written_solution/*.gz
+Assignment_1/written_solution/*.blg
+Assignment_1/written_solution/*.fls
+Assignment_1/written_solution/*.log
+Assignment_1/written_solution/*.pdf

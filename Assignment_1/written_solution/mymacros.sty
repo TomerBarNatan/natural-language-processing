@@ -1,0 +1,71 @@
+\ProvidesPackage{mymacros}[Simple Math Macros]
+
+\usepackage{latexsym}
+\usepackage{bbm}
+\usepackage[small,bf]{caption2}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+
+\newtheorem{case}{Case}
+
+\delimitershortfall=-1pt
+\let\Right\right
+\let\Left\left
+\def\right#1{\Right#1\@ifnextchar){\!\right}{}}
+\def\left#1{\Left#1\@ifnextchar({\!\left}{}}
+
+\newcommand{\bigO}O
+\newcommand{\set}[1]{\mathify{\left\{ #1 \right\}}}
+\def\half{\frac{1}{2}}
+
+\def\implies{\Rightarrow}
+\def\sizeof#1{\left| #1\right|}
+\def\setof#1{\left\{ #1\right\}  }
+
+%% Math Stuff, Symbols
+\newcommand{\field}[1]{\mathbb{#1}}
+\newcommand{\N}{\field{N}} % natural numbers
+\newcommand{\R}{\field{R}} % real numbers
+\newcommand{\Z}{\field{Z}} % integers
+\renewcommand{\Re}{\R} % reals
+\newcommand{\1}{{\bf 1}} % vector of all 1's
+\newcommand{\I}[1]{\mathbb{I}_{\left\{#1\right\}}} % indicator function
+\newcommand{\tends}{{\rightarrow}} % arrow for limits
+\newcommand{\ra}{{\rightarrow}} % abbreviation for right arrow
+\newcommand{\PR}{\mathsf{P}} % probability
+\newcommand{\E}{\mathsf{E}} % expectation
+\newcommand{\subjectto}{\mbox{\rm subject to}} % subject to
+\newcommand{\norm}[1]           {\left\| #1\right\|}
+\newcommand{\card}[1]           {\left| #1\right|}
+%% some caligraphic symbols
+\newcommand{\Ascr}{{\cal A}}
+\newcommand{\Bscr}{{\cal B}}
+\newcommand{\Cscr}{{\cal C}}
+\newcommand{\Dscr}{{\cal D}}
+\newcommand{\Escr}{{\cal E}}
+\newcommand{\Fscr}{{\cal F}}
+\newcommand{\Gscr}{{\cal G}}
+\newcommand{\Hscr}{{\cal H}}
+\newcommand{\Iscr}{{\cal I}}
+\newcommand{\Jscr}{{\cal J}}
+\newcommand{\Kscr}{{\cal K}}
+\newcommand{\Lscr}{{\cal L}}
+\newcommand{\Mscr}{{\cal M}}
+\newcommand{\Nscr}{{\cal N}}
+\newcommand{\Oscr}{{\cal O}}
+\newcommand{\Pscr}{{\cal P}}
+\newcommand{\Qscr}{{\cal Q}}
+\newcommand{\Rscr}{{\cal R}}
+\newcommand{\Sscr}{{\cal S}}
+\newcommand{\Tscr}{{\cal T}}
+\newcommand{\Uscr}{{\cal U}}
+\newcommand{\Vscr}{{\cal V}}
+\newcommand{\Wscr}{{\cal W}}
+\newcommand{\Xscr}{{\cal X}}
+\newcommand{\Yscr}{{\cal Y}}
+\newcommand{\Zscr}{{\cal Z}}
+
+%% math operators
+\newcommand\argmin{\mathop{\mbox{{\rm argmin}}}\limits}
+\newcommand\argmax{\mathop{\mbox{{\rm argmax}}}\limits}
+\newcommand\maximize{\mathop{\mbox{{\rm maximize}}}\limits}
+\newcommand\minimize{\mathop{\mbox{{\rm minimize}}}\limits}
