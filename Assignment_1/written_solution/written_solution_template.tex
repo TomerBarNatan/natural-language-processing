@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{csquotes}
+\usepackage{mymacros}
+
+\usepackage[shortlabels]{enumitem}
+\usepackage[noabbrev, capitalise]{cleveref}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ top=20mm,
+ bottom=25mm,
+ left=25mm,
+ right=25mm,
+ }
+
+% define your IDs here:
+\newcommand{\firststudentid}{318635646}
+\newcommand{\secondstudentid}{987654321}
+\newcommand{\thirdstudentid}{987654321}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Written Solution for Assignment 1}
+\chead{\firststudentid \qquad \secondstudentid \qquad \thirdstudentid}
+\lhead{Natural Language Processing}
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\renewcommand{\footrulewidth}{1pt}
+ 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.25}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\roman{subsubsection}}
+
+\begin{document}
+
+\refstepcounter{section}
+\section{Understanding word2vec}
+\subsection{}
+\input{q1/1_a.tex}
+
+\subsection{}
+\input{q1/1_b.tex}
+
+\subsection{}
+\input{q1/1_c.tex}
+
+\subsection{}
+\input{q1/1_d.tex}
+
+\subsection{}
+\input{q1/1_e.tex}
+
+\subsection{}
+\input{q1/1_f.tex}
+
+\section{Implementing word2vec}
+\setcounter{subsection}{4}
+\subsection{}
+YOUR ANSWER HERE
+
+\newpage
+\bibliography{main}
+\bibliographystyle{abbrv}
+
+\end{document}

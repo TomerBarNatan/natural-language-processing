@@ -1,0 +1,6 @@
+\begin{proof}
+  Note that the true empirical distribution $\bm{y}$ is a one-hot vector with a 1 for the true outside word o, and 0 everywhere else, thus:
+  \begin{equation*}
+    -\sum\limits_{w \in \text{W}} y_w \log(\hat{y}_w) = -\sum\limits_{w \in \text{W}} \I{o}(w) \log(\hat{y}_w) = \log(\hat{y}_o)
+  \end{equation*}
+\end{proof}

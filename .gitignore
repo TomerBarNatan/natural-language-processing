@@ -294,7 +294,13 @@ TSWLatexianTemp*
 
 # xwatermark package
 *.xwm
-
+Assignment_1/written_solution/*.fdb_latexmk
+Assignment_1/written_solution/*.aux
+Assignment_1/written_solution/*.gz
+Assignment_1/written_solution/*.blg
+Assignment_1/written_solution/*.fls
+Assignment_1/written_solution/*.log
+Assignment_1/written_solution/*.pdf
 # REVTeX puts footnotes in the bibliography by default, unless the nofootinbib
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
