@@ -1,0 +1,7 @@
+\begin{enumerate}
+  [label=(\roman*)]
+  \item ${\frac{\partial \bm J_{\textrm{skip-gram}}(c, w_{t-m},\ldots w_{t+m}, \bm V, \bm U)} {\partial \bm U}} = \sum_{\substack{-m \le j \le m \\ j \ne 0}} \frac{\partial \bm{J} (\bm{v_c},w_{t+j},\bm{U})}{\partial \bm{U}}  $
+  \item ${\frac{\partial \bm J_{\textrm{skip-gram}}(c, w_{t-m},\ldots w_{t+m}, \bm V, \bm U)} {\partial \bm v_c}} = \sum_{\substack{-m \le j \le m \\ j \ne 0}} \frac{\partial \bm{J} (\bm{v_c},w_{t+j},\bm{U})}{\partial \bm{v_c}}  $
+  \item Assuming $\bm J_{\textrm{skip-gram}}(c, w_{t-m},\ldots w_{t+m}, \bm V, \bm U)$ is not a function of $\bm v_c$ when $w \ne c$: \\
+   ${\frac{\partial \bm J_{\textrm{skip-gram}}(c, w_{t-m},\ldots w_{t+m}, \bm V, \bm U)} {\partial \bm v_w}} = \bm 0$ 
+\end{enumerate}

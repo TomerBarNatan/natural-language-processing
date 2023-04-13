@@ -1,0 +1,11 @@
+\begin{proof}
+  Let $\bm{x} \in \R^d$ be an input vector and let $c \in \R$ be some constant. For any $i \in [d]$ it holds that:  
+  \begin{equation*}
+    \begin{split}
+      (\text{softmax}(\bm{x} + c))_i & = \frac{\exp(x_i + c)}{\sum_{j = 1}^{d} \exp(x_j + c)} \\
+      & = \frac{e^c \exp(x_i)}{e^c \sum_{j = 1}^{d} \exp(x_j)} \\
+      & = \frac{\exp(x_i)}{\sum_{j = 1}^{d} \exp(x_j)} \\
+      & = (\text{softmax}(\bm{x}))_i
+    \end{split}
+  \end{equation*}
+\end{proof}

@@ -1,0 +1,58 @@
+\begin{proof}
+  We apply the derivative chain rule and divide into two cases depending on $w$: 
+  \begin{equation}\label{eq:gradient}
+    \begin{split}
+      \frac{\partial \bm{J}_{\text{na\"ive-softmax}}}{\partial \bm{u}_w}(c,o,\bm{V},\bm{U}) & = -\frac{\partial \log{}}{\partial P[O=o | C-c]}(P[O=o | C=c]) \cdot \frac{\partial P[O | C=c]}{\partial \bm{u}_w}(O=o) \\
+    \end{split}
+  \end{equation}
+  
+  Note that:
+  \begin{equation*}
+    \frac{\partial \log}{\partial P[O=o | C-c]}(P[O=o | C-c]) = \frac{1}{P[O=o | C=c]} = \frac{\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)}{\exp(\bm{u}_{o}^T \bm{v}_c)} 
+  \end{equation*}
+
+  \begin{description}
+    \item[Case $o \neq w$:]
+      \begin{equation*}
+        \begin{split}
+          \frac{\partial P[O | C=c]}{\partial \bm{u}_w}(O=o) 
+          & =  \exp(\bm{u}_{o}^T \bm{v}_c) \left(-\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)\right)^{-2}\right) \frac{\partial}{\partial \bm{u}_w} \exp(\bm{u}_{w}^T \bm{v}_c) \\
+          & = -\frac{\exp((\bm{u}_{o} + \bm{u}_{w}) ^T \bm{v}_c)} {\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)\right)^2} \cdot \bm{v}_c
+        \end{split}
+      \end{equation*}
+
+      Plugging this expression into (\ref{eq:gradient}):
+      \begin{equation*}
+        \begin{split}
+          \frac{\partial \bm{J}_{\text{na\"ive-softmax}}}{\partial \bm{u}_w}(c,o,\bm{V},\bm{U}) 
+          & = \frac{\exp(\bm{u}_{w}^T \bm{v}_c)} {\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)} \cdot \bm{v}_c \\
+          & = \hat{\bm{y}}_w \cdot \bm{v}_c
+        \end{split}
+      \end{equation*}
+
+      \item[Case $o = w$:]
+      \begin{equation*}
+        \begin{split}
+          \frac{\partial P[O | C=c]}{\partial \bm{u}_o}(O=o) 
+          & =  \frac{\exp(\bm{u}_{o}^T \bm{v}_c) \bm{v}_c \cdot \left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)\right) \quad - \quad \exp(\bm{u}_{o}^T \bm{v}_c) \bm{v}_c \cdot \exp(\bm{u}_{o}^T \bm{v}_c)}{\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)\right)^2} \\
+          & = \frac{\exp(\bm{u}_{o}^T \bm{v}_c)\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c) - \exp(\bm{u}_{o}^T \bm{v}_c) \right) \bm{v}_c}{\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)\right)^2} \\
+        \end{split}
+      \end{equation*}
+
+      Plugging this expression into (\ref{eq:gradient}):
+      \begin{equation*}
+        \begin{split}
+          \frac{\partial \bm{J}_{\text{na\"ive-softmax}}}{\partial \bm{u}_o}(c,o,\bm{V},\bm{U})
+          & = - \frac{\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)}{\exp(\bm{u}_{o}^T \bm{v}_c)} \cdot \frac{\exp(\bm{u}_{o}^T \bm{v}_c)\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c) - \exp(\bm{u}_{o}^T \bm{v}_c) \right) \bm{v}_c}{\left(\sum\limits_{w' \in \text{W}} \exp(\bm{u}_{w'}^T \bm{v}_c)\right)^2} \\
+          & = (\hat{\bm{y}}_o - 1)\bm{v}_c \\
+        \end{split}
+      \end{equation*}
+
+  \end{description}
+
+  Thus the differential of $\bm{J}_{\text{na\"ive-softmax}}$ w.r.t $\bm{U}$ is given by:
+  \begin{equation*}
+    \frac{\partial \bm{J}_{\text{na\"ive-softmax}}}{\partial \bm{U}}(c,o,\bm{V},\bm{U}) = \bm{v}_c(\hat{\bm{y}} - \bm{y})^T
+  \end{equation*}
+
+\end{proof}

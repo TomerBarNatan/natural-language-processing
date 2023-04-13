@@ -1,0 +1,5 @@
+Answer taken from \cite{Goldberg2014word2vecED}: \\
+One motivation for making this assumption is the following:
+consider the case where both the word dog and the context dog share the same vector $\bm v$. 
+Words hardly appear in the contexts of themselves, and so the model should assign a low probability to
+$\Pr[dog | dog]$, which entails assigning a low value to $\bm v^T \bm v$ which is impossible.
