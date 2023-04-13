@@ -61,6 +61,16 @@ YOUR ANSWER HERE
 YOUR ANSWER HERE
 \section{Implementing word2vec}
 \setcounter{subsection}{4}
+\section{Paraphrase Detection (theoretical)}
+\subsection{}
+We note that because of the relu all of the elements in both $relu(x_1)$ and $relu(x_2)$ are positive, 
+because of that the dot product $relu(x_1)^T relu(x_2)$ is composed of a sum of positive arguments, hence 
+$$relu(x_1)^T relu(x_2) > 0.5$$
+Now, we note that for every positive scalar $i$, it holds that $\sigma (i) > 0.5$. Hence, we arrive at the conclusion that the probability for every sample is
+$$p(Paraphrases|x_1, x_2) = \sigma (relu(x_1)^T relu(x_2)) > 0.5$$
+Assuming that our decision threshold is $0.5$ it holds that we predict True for every pair.
+Hence, we predict correctly for True pairs and wrong for False pairs. Our accuracy is 
+$$\frac{1}{1+3}=25 \% $$
 \subsection{}
 
 
