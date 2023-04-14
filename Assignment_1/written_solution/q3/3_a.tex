@@ -1,0 +1,54 @@
+\begin{proof}
+    Using the first hint, we can rewrite our objection as follows:
+    \begin{equation*}
+            \mathcal{L}(\theta) = \prod_{c,o} p_{\theta}(o|c)^{\#(c,o)}
+    \end{equation*}
+    This is true because the term $p_\theta(o|c)$ by definition will appear $\#(c,o)$ times.
+    Notice that for a center word $c$, the distribution of $p_theta(o|c)$ is independent from $p_\theta(o|\hat{c})$ where $c\neq\hat{c}$.
+    So, we can split $\cal{L}(\theta)$ into $\cal{L}$$_c(\theta)$ such that:
+    \begin{equation*}
+            \mathcal{L}_c(\theta) = \prod_{o} p_{\theta}(o|c)^{\#(c,o)}
+    \end{equation*}
+    Taking a logarithm we get:
+    \begin{equation*}
+            J_c(\theta) = \sum_{o} \#(c,o)\log{p_{\theta}(o|c)}
+    \end{equation*}
+
+    Since for each $c$, $p_theta(o|c)$ is a probability distribution, we know that:
+    \begin{equation*}
+            \sum_{o}p_{\theta}(o|c)=1
+    \end{equation*}
+    So we want to solve: $J_c(\theta) = \sum_{o} \#(c,o)\log{p_{\theta}(o|c)}$ s.t $\sum_{o}p_{\theta}(o|c)=1$  and  $p_{\theta}(o|c)\ge0$
+
+    We will solve it using Lagrange multipliers:
+    \begin{equation*}
+        \begin{split}
+            L_c(\theta,\lambda)=\sum_{o}\#(c,o)\log{p_{\theta}(o|c)}-\lambda(\sum_{o}p_{\theta}(o|c)-1)
+        \end{split}
+    \end{equation*}
+    \begin{equation*}
+        \begin{split}
+            \frac{\partial L_c}{\partial p_{\theta}(o|c)}=\frac{\#(c,o)}{p_{\theta}(o|c)}-\lambda
+        \end{split}
+    \end{equation*}
+
+    So: 
+    \begin{equation*}
+        \frac{\partial L_c}{\partial p_{\theta}(o|c)}=0\rightarrow p_{\theta}(o|c)=\frac{\#(c,o)}{\lambda}
+    \end{equation*}
+
+    Now we can find $\lambda$ using the constrains:
+    
+    \begin{equation*}
+        \sum_{o} p_\theta(o|c)= \sum_{o}\frac{\#(c,o)}{\lambda}=1
+    \end{equation*}
+    Which means that:
+    \begin{equation*}
+        \lambda = \sum_{o}\#(c,o)
+    \end{equation*}
+    So finally:
+    \begin{equation*}
+        p_\theta(o|c) = \frac{\#(c,o)}{\sum_{o'}\#(c,o')}
+    \end{equation*}
+    as desired.
+\end{proof}

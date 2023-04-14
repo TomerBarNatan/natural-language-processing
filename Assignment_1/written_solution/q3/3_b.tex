@@ -1,0 +1,17 @@
+We will now make the assumption that each word in
+our vocabulary, denoted as $V = \{a, b, c, d\}$, 
+is represented by a real number. Consider the corpus $T = \{”aa”, ”bb”, ”cc”, ”dd”\}$.
+We will prove that achieving the optimum is impossible.
+Given the result of the previous section, we will prove that we cannot achieve $ p_\theta(o|c) = \frac{\#(c,o)}{\sum_{o'}\#(c,o')}$.
+\begin{proof}
+    Denote the optimal probability by $ p_{\theta^*}(o|c)$.
+    Notice that in our corpus $p_{\theta^*}(o|c)=1$ iff $o=c$ and $0$ otherwise.
+    Assume toward contradiction that we have found a word representation that results in the optimal solution.
+    By the pigeonhole principle, there must exsits two different words with the same sign, denote them by $u_c$ and $u_{c'}$.
+    Assume without loss of generality that $|u_c|\le|u_{c'}|$.
+    Since they have the same sign we know that $\exp{(u_cu_c)}\le\exp{(u_cu_{c'})}$.\\\\Now we get that:
+    \begin{equation}\label{eq:ineq}
+        p_\theta(c|c)= \frac{\exp{(u_cu_c)}}{\sum_{w\in V}\exp{(u_wu_c)}} \le \frac{\exp{(u_cu_{c'})}}{\sum_{w\in V}\exp{(u_wu_c)}} \le p_{\theta}(c|c')
+    \end{equation}
+    But we know that $p_\theta(c|c)=1$ and $ p_{\theta}(c|c')=0$, wich contradicts \ref{eq:ineq}.
+\end{proof}
