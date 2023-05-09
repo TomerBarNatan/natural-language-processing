@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{csquotes}
+\usepackage{mymacros}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[shortlabels]{enumitem}
+\usepackage[noabbrev, capitalise]{cleveref}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ top=20mm,
+ bottom=25mm,
+ left=25mm,
+ right=25mm,
+ }
+
+% define your IDs here:
+\newcommand{\firststudentid}{311151138}
+\newcommand{\secondstudentid}{987654321}
+\newcommand{\thirdstudentid}{987654321}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Written Solution for Assignment 2}
+\chead{\firststudentid \qquad \secondstudentid \qquad \thirdstudentid}
+\lhead{Natural Language Processing}
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\renewcommand{\footrulewidth}{1pt}
+ 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.25}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\roman{subsubsection}}
+
+\begin{document}
+
+% \subsection{}
+% \input{q1/1_a.tex}
+
+
+% \subsection{}
+% \input{q2/2_a.tex}
+
+\setcounter{subsection}{3}
+\subsection{}
+\input{q3/3_a}
+
+
+% \subsection{}
+% \input{q4/4_a}
+% \subsection{}
+% \input{q4/4_b}
+
+\newpage
+\bibliography{main}
+\bibliographystyle{abbrv}
+
+\end{document}
