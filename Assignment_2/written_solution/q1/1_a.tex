@@ -1,0 +1,13 @@
+First let us denote by $t$ the index in which $y$ has the 1. For simplicity, we assume that the base of the log is $e$.
+We get that 
+$$CE(\hat{y})= -\sum_i y_i log(\hat{y}_i)=-log(\hat{y}_t)=-log(\frac{exp(\theta_t)}{\sum_j exp(\theta_j)})=-\theta_t + log(\sum_j exp(\theta_j))$$
+Let us look at the right term of the last equation. We get that $$\frac{\partial log(\sum_j exp(\theta_j))}{\partial \theta_i}=\frac{exp(\theta_i)}{\sum_j exp(\theta_j)}=\hat{y}_i$$
+For the term we that $\frac{\partial -\theta_t}{\partial \theta_i}=-1$ if $i=t$ and $0$ otherwise. To summarize, we get 
+$$
+\frac{\partial CE}{\partial \theta_i}=
+\begin{cases}
+\hat{y}_i - 1, \text{ } i=t  \\ 
+\hat{y}_i, \text{     } i\neq t
+\end{cases}
+$$
+Note that the partial derivative for $\theta_t$ is negative, which makes sense since when applying SGD we subtract the derivative from the current value of $\theta_t$, hence we would enlarge $\theta_t$ and minimize the loss. For all other $i \neq t$ the derivative is positive.
