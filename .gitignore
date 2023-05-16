@@ -307,3 +307,12 @@ Assignment_1/written_solution/*.pdf
 #*Notes.bib
 Assignment_1/.DS_Store
 .DS_Store
+Assignment_2/q1/data_utils/__pycache__/__init__.cpython-39.pyc
+Assignment_2/q1/tests/__pycache__/test_submission.cpython-27-PYTEST.pyc
+Assignment_2/q1/data_utils/__pycache__/utils.cpython-39.pyc
+Assignment_2/q1/__pycache__/gradcheck.cpython-39.pyc
+Assignment_2/q1/__pycache__/q1c_neural.cpython-39.pyc
+Assignment_2/q1/__pycache__/sgd.cpython-39.pyc
+Assignment_2/q1/__pycache__/sigmoid.cpython-39.pyc
+Assignment_2/q1/__pycache__/softmax.cpython-39.pyc
+Assignment_2/q1/data/.DS_Store
