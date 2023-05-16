@@ -100,7 +100,7 @@ def lm_wrapper(in_word_index, out_word_index, num_to_word_embedding, dimensions,
     return cost, grad
 
 
-def eval_neural_lm(eval_data_path, num_to_word_embedding, word_to_num, dimensions, params):
+def eval_neural_lm(eval_data_path):
     """
     Evaluate perplexity (use dev set when tuning and test at the end)
     """
@@ -172,18 +172,18 @@ if __name__ == "__main__":
     params = sgd(
         lambda vec: lm_wrapper(in_word_index, out_word_index,
                                num_to_word_embedding, dimensions, vec),
-        params, LEARNING_RATE, NUM_OF_SGD_ITERATIONS, None, False, 1000)
+        params, LEARNING_RATE, NUM_OF_SGD_ITERATIONS, None, True, 1000)
 
     print(f"training took {time.time() - startTime} seconds")
 
     # Evaluate perplexity with dev-data
     perplexity = eval_neural_lm(
-        'data/lm/ptb-dev.txt', num_to_word_embedding, word_to_num, dimensions, params)
+        'data/lm/ptb-dev.txt')
     print(f"dev perplexity : {perplexity}")
 
     # Evaluate perplexity with test-data (only at test time!)
     if os.path.exists('data/lm/ptb-test.txt'):
-        perplexity = eval_neural_lm('data/lm/ptb-test.txt', num_to_word_embedding, word_to_num, dimensions, params)
+        perplexity = eval_neural_lm('data/lm/ptb-test.txt')
         print(f"test perplexity : {perplexity}")
     else:
         print("test perplexity will be evaluated only at test time!")
