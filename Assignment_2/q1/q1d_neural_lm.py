@@ -124,13 +124,11 @@ def eval_neural_lm(eval_data_path):
         data = np.stack(data, axis=0)
         labels = np.stack(labels, axis=0)
         y_hat = forward(data, labels, params, dimensions)
-        cost = (-1*np.log2(y_hat)).mean()
+        cost = (-1*np.log(y_hat)).mean()
         n_batches += 1
         perplexity += cost
-        # if c_batch % 1000 == 0:
-        #     print(f"c_batch: {c_batch}")
     perplexity = perplexity/n_batches
-    perplexity = 2**perplexity
+    perplexity = np.exp(perplexity)
     return perplexity
 
 
@@ -187,3 +185,13 @@ if __name__ == "__main__":
         print(f"test perplexity : {perplexity}")
     else:
         print("test perplexity will be evaluated only at test time!")
+
+
+    print("# Q4.2")
+    print("wikipedia perplexity")
+    wikipedia_perplexity = eval_neural_lm('wikipedia_for_perplexity.txt')
+    print(f"wikipedia perplexity : {wikipedia_perplexity}")
+    print("shakespeare perplexity")
+    shakespeare_perplexity = eval_neural_lm('shakespeare_for_perplexity.txt')
+    print(f"shakespeare perplexity : {shakespeare_perplexity}")
+    
