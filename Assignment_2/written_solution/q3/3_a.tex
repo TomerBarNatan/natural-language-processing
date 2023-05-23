@@ -1,7 +1,9 @@
 The advantage of character level model stems from the fact that two words can be very similar, for example "walk" and "walked". 
 With a word level model we don't leverage this similarity and ignore this information which may lead to poorer performance. 
 Character level model can infer that the character sequence "walk" and the character sequence "walked" are similar. If we treat words with capital 
-letters as different words, e.g. "Walk" and "walk" then it's even more confusing to word level model.
+letters as different words, e.g. "Walk" and "walk" then it's even more confusing to word level model. 
+Another advantage of character level models is that they're more expressive - many times we want to convey in text sounds that aren't necessarily words, for example we convey thinking in text as "hmm" or we can convey drunkenness as giberrish of characters, 
+this is hard (or impossible) to do with word level model.
 The disadvantage of character level model is that it increases the length of the sequence. If we have a document of 100 words, 
 and the average length of a word is for example ~4, then with a word level model the sequence length is 100 and with a character 
 level model the length is ~400. Plus, with character level model there's an added difficulty - the model needs to learn what sequences of characters 
