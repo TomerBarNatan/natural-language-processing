@@ -8,6 +8,6 @@ $$
 \begin{cases}
 \hat{y}_i - 1, \text{ } i=t  \\ 
 \hat{y}_i, \text{     } i\neq t
-\end{cases}
+\end{cases} = \hat{y}-y
 $$
 Note that the partial derivative for $\theta_t$ is negative, which makes sense since when applying SGD we subtract the derivative from the current value of $\theta_t$, hence we would enlarge $\theta_t$ and minimize the loss. For all other $i \neq t$ the derivative is positive.
