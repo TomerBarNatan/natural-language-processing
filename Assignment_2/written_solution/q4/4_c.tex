@@ -1,0 +1,9 @@
+There are two insights that we conclude from the results. First, the RNN seems to be better at predicting the next word than the Bi-Gram model for both of the datasets, as we can see from its lower perplexity values.
+Second, the perplexity of the RNN is lower for the Shakespeare dataset than for the Wikipedia dataset, this is true for the Bi-Gram model as well.
+
+The first insight can be explained by the fact the RNN is not a bigram model, i.e each character prediction depends (theoretically, at least) on all the previous characters, while the Bi-Gram model only depends on the previous character. 
+We've seen in class (and understand intuitively) that the markovian assumption that underlies the bigram model does not hold in reality.
+
+The second insight can be explained by the fact that the RNN was trained on Shakespeare text, hence we can expcet it to be better in a similar task, i.e another Shakespeare text. That's probably not the whole story, as we can see that the 
+bigram model, which wasn't trained on Shakespeare text, has lower perplexity on the Shakespeare text as well. This may be because the Wikipedia text may be "harder" in a sense, for example it may contain more facts and less
+stylistic text, which may be harder to predict (even for LLM facts are problematic).
