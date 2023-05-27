@@ -76,7 +76,7 @@ def forward_backward_prop(data, labels, params, dimensions):
     grad = np.concatenate((gradW1.flatten(), gradb1.flatten(),
         gradW2.flatten(), gradb2.flatten()))
 
-    cost = (-1*np.log2(np.multiply(y_hat, labels).sum(axis=1))).sum()
+    cost = (-1*np.log(np.multiply(y_hat, labels).sum(axis=1))).sum()
     return cost, grad
 
 
