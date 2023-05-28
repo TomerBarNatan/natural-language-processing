@@ -202,10 +202,10 @@ if __name__ == "__main__":
 
     print(f"training took {time.time() - startTime} seconds")
 
-    # # Evaluate perplexity with dev-data
-    # perplexity = eval_neural_lm(
-    #    'data/lm/ptb-dev.txt')
-    # print(f"dev perplexity : {perplexity}")
+    # Evaluate perplexity with dev-data
+    perplexity = eval_neural_lm(
+       'data/lm/ptb-dev.txt')
+    print(f"dev perplexity : {perplexity}")
 
     # Evaluate perplexity with test-data (only at test time!)
     if os.path.exists('data/lm/ptb-test.txt'):
