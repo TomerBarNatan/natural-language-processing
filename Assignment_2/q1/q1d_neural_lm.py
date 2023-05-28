@@ -8,6 +8,7 @@ import pandas as pd
 from data_utils import utils
 from sgd import sgd
 from q1c_neural import forward, forward_backward_prop
+import re
 
 
 VOCAB_EMBEDDING_PATH = "data/lm/vocab.embeddings.glove.txt"
@@ -107,7 +108,39 @@ def eval_neural_lm(eval_data_path):
     in_word_index, out_word_index = convert_to_lm_dataset(S_dev)
     assert len(in_word_index) == len(out_word_index)
     num_of_examples = len(in_word_index)
+    perplexity = 0
+    print(f"num of examples: {num_of_examples}")
+    while c_batch < num_of_examples:
+        data = [num_to_word_embedding[in_word_index[i]]
+                for i in range(c_batch, min((c_batch+b_size), len(in_word_index)))]
+        labels = [int_to_one_hot(out_word_index[i], output_dim) for i in range(
+            c_batch, min((c_batch+b_size), len(in_word_index)))]
+        c_batch += b_size
+        data = np.stack(data, axis=0)
+        labels = np.stack(labels, axis=0)
+        y_hat = forward(data, labels, params, dimensions)
+        cost = (-1*np.log(y_hat)).mean()
+        n_batches += 1
+        perplexity += cost
+    perplexity = perplexity/n_batches
+    perplexity = np.exp(perplexity)
+    return perplexity
 
+
+def eval_neural_lm_tests(eval_data_path):
+    b_size = 50
+    c_batch = 0
+    n_batches = 0
+
+    with open(eval_data_path, "r") as f:
+        S = f.read()
+        S = re.split(r" |,|!|\.", S)
+        S = [(word, None) for word in S]
+        S = utils.docs_to_indices([S], word_to_num)
+        in_word_index, out_word_index = convert_to_lm_dataset(S)
+
+    assert len(in_word_index) == len(out_word_index)
+    num_of_examples = len(in_word_index)
     perplexity = 0
     print(f"num of examples: {num_of_examples}")
     while c_batch < num_of_examples:
@@ -169,10 +202,10 @@ if __name__ == "__main__":
 
     print(f"training took {time.time() - startTime} seconds")
 
-    # Evaluate perplexity with dev-data
-    perplexity = eval_neural_lm(
-        'data/lm/ptb-dev.txt')
-    print(f"dev perplexity : {perplexity}")
+    # # Evaluate perplexity with dev-data
+    # perplexity = eval_neural_lm(
+    #    'data/lm/ptb-dev.txt')
+    # print(f"dev perplexity : {perplexity}")
 
     # Evaluate perplexity with test-data (only at test time!)
     if os.path.exists('data/lm/ptb-test.txt'):
@@ -184,9 +217,9 @@ if __name__ == "__main__":
 
     print("# Q4.2")
     print("wikipedia perplexity")
-    wikipedia_perplexity = eval_neural_lm('wikipedia_for_perplexity.txt')
+    wikipedia_perplexity = eval_neural_lm_tests('wikipedia_for_perplexity.txt')
     print(f"wikipedia perplexity : {wikipedia_perplexity}")
     print("shakespeare perplexity")
-    shakespeare_perplexity = eval_neural_lm('shakespeare_for_perplexity.txt')
+    shakespeare_perplexity = eval_neural_lm_tests('shakespeare_for_perplexity.txt')
     print(f"shakespeare perplexity : {shakespeare_perplexity}")
     
