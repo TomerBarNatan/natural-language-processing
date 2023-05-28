@@ -1,0 +1,24 @@
+Let's denote the left-to-right count-based bi-gram model as L and the right-to-left count-based bi-gram model as R. The probability estimates for each model are as follows:
+
+$L(w | v) = \frac{C_{L}(w,v)}{C(v)}$ - Probability of $w$ given $v$ in the left-to-right model.
+
+$R(w | v) = \frac{C_{R}(w,v)}{C(v)}$ - Probability of $w$ given $v$ in the right-to-left model.
+
+Where $C_{L}(w,v)$ and $C_{R}(w,v)$ is counting the bi-gram sequence from left/right respectively.
+
+Notice that by definition $C_{L}(w,v) = C_{R}(v,w)$
+
+Also:
+
+$L(x_i | x_{i-1}) = \frac{C_{L}(x_i,x_{i-1})}{C(x_{i-1})} = \frac{C_{R}(x_{i-1},x_i)}{C(x_{i-1})} = \frac{R(x_{i-1} | x_i)}{C(x_{i-1})}C(x_i)$
+
+Estimating the bi-gram from left to right for a corpus of size $M$ gives:
+
+$P(x_0x_1...x_n)=P(x_0)\Pi_{i=1,...,n}L(x_i | x_{i-1})=\frac{C(x_0)}{M}\prod_{i=1}^{n}L(x_i | x_{i-1})=
+\frac{C(x_0)}{M}\prod_{i=1}^{n}\frac{R(x_{i-1} | x_i)}{C(x_{i-1})}C(x_i)$
+
+Notice that we got a telescopic product which after cancelling elements equals:
+
+$\frac{C(x_0)}{M}\frac{C(x_n)}{C(x_0)}\prod_{i=1}^{n}R(x_{i-1} | x_i) = \frac{C(x_n)}{M}\prod_{i=1}^{n}R(x_{i-1} | x_i)$
+
+This is exactly estimating the bi-gram model with right to left count, which is what we wanted to prove.
