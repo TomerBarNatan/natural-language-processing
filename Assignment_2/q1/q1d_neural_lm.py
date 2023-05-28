@@ -75,22 +75,17 @@ def int_to_one_hot(number, dim):
     return res
 
 
-current_batch = 0
-
 
 def lm_wrapper(in_word_index, out_word_index, num_to_word_embedding, dimensions, params):
-    global current_batch
-
     # data = np.zeros([BATCH_SIZE, input_dim])
     # labels = np.zeros([BATCH_SIZE, output_dim])
 
     # Construct the data batch and run you backpropogation implementation
+    current_batch = np.random.randint(0, len(in_word_index))
     data = [num_to_word_embedding[in_word_index[i % len(in_word_index)]]
             for i in range(current_batch, current_batch+BATCH_SIZE)]
     labels = [int_to_one_hot(out_word_index[i % len(in_word_index)], output_dim)
               for i in range(current_batch, current_batch+BATCH_SIZE)]
-    current_batch += BATCH_SIZE
-    current_batch = current_batch % len(in_word_index)
     data = np.stack(data, axis=0)
     labels = np.stack(labels, axis=0)
 
