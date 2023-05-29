@@ -2,7 +2,8 @@ There are two insights that we conclude from the results. First, the RNN seems t
 Second, the perplexity of the RNN is lower for the Shakespeare dataset than for the Wikipedia dataset.
 The reason that the RNN is much better than the Bi-Gram model is, in my opinion, that the RNN is charachter level model. 
 That means that in each step it has to predict the next token out of 26 possible tokens (the 26 letters in the English alphabet). 
-On the other hand, the Bi-Gram model is a word level model, and therefore it has to predict the next token out of a much larger vocabulary. Hence, it's not a "fair game", in that regard.
+On the other hand, the Bi-Gram model is a word level model, and therefore it has to predict the next token out of a much larger vocabulary. Hence, it's not a "fair game", in that regard. 
+Not only the Bi-Gram model a word level token but examining the code we can see that its vocabulary is limited only to 2000 words.
 
 Another reason that may contribute to the superiority of the RNN is that the RNN is not a bigram model, i.e each character prediction depends (theoretically, at least) on all the previous characters, while the Bi-Gram model only depends on the previous character. 
 We've seen in class (and understand intuitively) that the markovian assumption that underlies the bigram model does not hold in reality.
