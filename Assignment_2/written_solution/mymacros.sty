@@ -69,3 +69,16 @@
 \newcommand\argmax{\mathop{\mbox{{\rm argmax}}}\limits}
 \newcommand\maximize{\mathop{\mbox{{\rm maximize}}}\limits}
 \newcommand\minimize{\mathop{\mbox{{\rm minimize}}}\limits}
+
+\newcommand{\xlist}[1]{x_1,x_2,\ldots,x_{#1}}
+\newcommand{\vlist}[2]{#1_1,#1_2,\ldots,#1_{#2}}
+\newcommand{\tvlist}[2]{#1^{(1)},#1^{(2)},\ldots,#1^{(#2)}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \littletaller % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
