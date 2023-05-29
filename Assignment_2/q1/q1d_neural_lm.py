@@ -135,7 +135,8 @@ def eval_neural_lm_tests(eval_data_path):
     with open(eval_data_path, "r") as f:
         S = f.read()
         S = S.replace("'d", " 'd").replace("'s", " 's")
-        S = re.split(r" |,|!|\.|:", S)
+        S = re.split(r" |(,)|(!)|(\.)|(:)", S)
+        S = [token for token in S if token is not None and token != "" and token != " "]
         S = [(word, None) for word in S]
         S = utils.docs_to_indices([S], word_to_num)
         in_word_index, out_word_index = convert_to_lm_dataset(S)
