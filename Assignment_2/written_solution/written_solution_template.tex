@@ -11,6 +11,7 @@
 \usepackage{mymacros}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{mathtools}
 \usepackage[shortlabels]{enumitem}
 \usepackage[noabbrev, capitalise]{cleveref}
 
@@ -24,13 +25,13 @@
  }
 
 % define your IDs here:
-\newcommand{\firststudentid}{311151138}
-\newcommand{\secondstudentid}{987654321}
-\newcommand{\thirdstudentid}{987654321}
+\newcommand{\firststudentid}{205679863}
+\newcommand{\secondstudentid}{311151138}
+\newcommand{\thirdstudentid}{318635646}
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Written Solution for Assignment 2}
+\rhead{Solution for Assignment 2}
 \chead{\firststudentid \qquad \secondstudentid \qquad \thirdstudentid}
 \lhead{Natural Language Processing}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
@@ -45,6 +46,7 @@
 
 \begin{document}
 
+\section{Word-Level Neural Bi-gram Language Model}
 \subsection{}
 \input{q1/1_a.tex}
 
@@ -53,18 +55,27 @@
 % \subsection{}
 % \input{q2/2_a.tex}
 
-\setcounter{subsection}{3}
+\section{Theoretical Inquiry of a Simple RNN Language Model}
+\subsection{}
+\input{q2/q2_a.tex}
+
+\subsection{}
+\input{q2/q2_b.tex}
+
+\section{Generating Shakespeare Using a Character-level Language Model}
 \subsection{}
 \input{q3/3_a}
 
-
+\section{Perplexity}
 \subsection{}
 \input{q4/4_a}
 \subsection{}
 \input{q4/4_b}
 \subsection{}
 \input{q4/4_c}
-\setcounter{subsection}{5}
+
+
+\section{Deep Averaging Networks}
 \subsection{}
 \input{q5/5_a.tex}
 \subsection{}
@@ -75,11 +86,11 @@
 \input{q5/5_d.tex}
 \subsection{}
 \input{q5/5_e.tex}
-\setcounter{subsection}{6}
+
+
+\section{Right-to-left vs left-to-right Estimation}
 \subsection{}
 \input{q6/q6.tex}
-\newpage
-\bibliography{main}
-\bibliographystyle{abbrv}
+
 
 \end{document}

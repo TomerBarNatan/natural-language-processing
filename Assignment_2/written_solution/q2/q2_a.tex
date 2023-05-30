@@ -1,0 +1,143 @@
+The notation used in the question is incorrect, we assume all vectors are "column" vectors e.g. $h^{(t)} \in \R^{D_h}$, and that the appropriate transposed were omitted in the question.  
+
+\subsubsection[short]{$\frac{\partial J^{(t)}}{\partial U}(\theta)$}
+First we compute $\frac{\partial J^{(t)}}{\partial U}(\theta)$. 
+Recall that because $y^{(t)}$ is a one-hot vector our loss simplifies to:
+\begin{equation}
+  J^{(t)}(\theta) = -{y_k}^{(t)} \log {\hat{y}_k}^{(t)}
+\end{equation}
+where $k$ is the index of the target word in the vocabulary.\\
+
+Next, let us denote ${o^{(t)}}^T = {h^{(t)}}^T U + b_2^T$, recall our previous computation of the differential of the cross entropy loss with a one-hot vector:
+\begin{equation} \label{eq:grad_o}
+  \frac{\partial J^{(t)}}{\partial o^{(t)}}(\theta) = \hat{y}^{(t)} - y^{(t)}
+\end{equation}
+Furthermore we have:
+\begin{equation}
+  \frac{\partial o_l^{(t)}}{\partial U_{i,j}}(\theta) = \I{l=j} h^{(t)}_i
+\end{equation}
+Combining the last results yields:
+\begin{equation}
+  \frac{\partial J^{(t)}}{\partial U_{i,j}}(\theta) =  h^{(t)}_i (\hat{y}^{(t)} - y^{(t)})_j
+\end{equation}
+which is recognizable as the outer product:
+\begin{equation}
+  \boxed{ \frac{\partial J^{(t)}}{\partial U}(\theta) =  h^{(t)} \otimes (\hat{y}^{(t)} - y^{(t)}) } 
+\end{equation}
+
+\subsubsection[short]{$\frac{\partial J^{(t)}}{\partial L_{x^{(t)}}}(\theta)$}
+Next we compute $\frac{\partial J^{(t)}}{\partial L_{x^{(t)}}}(\theta)$, note that this gradient must be back-propagated through time, but we defer it to section b. 
+Again applying the chain rule we have:
+\begin{equation} \label{eq:grad_L}
+  \frac{\partial J^{(t)}}{\partial L_{i,j}}(\theta) = \frac{\partial J^{(t)}}{\partial \hat{y}^{(t)}} \frac{{\partial \hat{y}^{(t)}}}{\partial o^{(t)}} \frac{\partial o^{(t)}}{\partial h^{(t)}} \frac{\partial h^{(t)}}{\partial L_{i,j}} 
+\end{equation}
+
+where $\frac{\partial J^{(t)}}{\partial \hat{y}^{(t)}} \frac{{\partial \hat{y}^{(t)}}}{\partial o^{(t)}} = \frac{\partial J^{(t)}}{\partial o^{(t)}} = \hat{y}^{(t)} - y^{(t)}$ was already computed in (\ref{eq:grad_o}). 
+The third term in (\ref{eq:grad_L}) is immediate by the definition of the differential of a linear function:
+\begin{equation} \label{eq:grad_o_by_h}
+  \frac{\partial o_l^{(t)}}{\partial h_m^{(t)}} = (U^T)_{l,m} = U_{m,l}
+\end{equation}
+
+Lastly we derive the fourth term in (\ref{eq:grad_L}) using the chain-rule without unfolding through time.
+Let us denote $a^{(t)} = H^T h^{(t-1)} +I^T e^{(t)} + b_1^T$, then:
+\begin{equation} \label{eq:grad_h_by_L}
+  \begin{aligned}
+    \frac{\partial h^{(t)}}{\partial L_{i,j}} &= \frac{\partial \sigma}{\partial a^{(t)}} \left( \frac{\partial}{\partial L_{i,j}} { \left(L_{x^{(t)}}I \right)}  + \frac{\partial }{\partial L_{i,j}} \left( {h^{(t-1)}}^T H \right) \right) \\
+  \end{aligned}
+\end{equation}
+
+For this section, we make the simplifying assumption that $x^{(t_1)} \neq x^{(t_2)}$ for any $t_1 \neq t_2$, as implied in the question,
+which implies that $ \frac{\partial }{\partial L_{x^{(t)}}} \left( {h^{(t-1)}}^T H \right) = 0$ .
+
+Recalling the derivative of the sigmoid yields:
+\begin{equation}
+  \frac{\partial \sigma_k(a^{(t)})}{\partial a^{(t)}_l}(\theta) = \sigma (a^{(t)}_k) \left(1 - a^{(t)}_k \right) \frac{\partial a^{(t)}_k}{\partial a^{(t)}_l}
+\end{equation}
+
+Thus we have:
+\begin{equation}
+  \frac{\partial \sigma(a^{(t)})}{\partial a^{(t)}}(\theta) = \text{diag}\left[ h^{(t)} \right]  \text{diag}\left[ \vec{1} - h^{(t)} \right] 
+\end{equation}
+
+A simple computation yields:
+\begin{equation}
+  \frac{\partial}{\partial L_{x^{(t)}}} { \left(L_{x^{(t)}}I \right)} = I^T
+\end{equation}
+
+Plugging the above computations into (\ref{eq:grad_L}) gives:
+\begin{equation} \label{eq:grad_L_final}
+  \boxed{ \frac{\partial J^{(t)}}{\partial L_{x^{(t)}}}(\theta) = \left(\hat{y}^{(t)} - y^{(t)}\right)^T U^T \; \text{diag}\left[ h^{(t)} \right] \text{diag}\left[ \vec{1} - h^{(t)} \right] I^T }
+\end{equation}
+
+
+\subsubsection[short]{$ \frac{\partial J^{(t)}}{\partial I}(\theta) $}
+
+In a similar fashion to (\ref{eq:grad_L}), we apply the chain rule:
+\begin{equation} \label{eq:grad_I_chainrule}
+  \frac{\partial J^{(t)}}{\partial I_{i,j}}(\theta) = \frac{\partial J^{(t)}}{\partial \hat{y}_k^{(t)}} \frac{{\partial \hat{y}_k^{(t)}}}{\partial o_l^{(t)}} \frac{\partial o_l^{(t)}}{\partial h^{(t)}} \frac{\partial h^{(t)}}{\partial I_{i,j}} 
+\end{equation}
+
+Note that only the last term in (\ref{eq:grad_I}) differs from (\ref{eq:grad_L}), futhermore in a similar fashion to (\ref{eq:grad_h_by_L}):
+\begin{equation} \label{eq:grad_h_by_I}
+  \frac{\partial h^{(t)}}{\partial I_{i,j}} = \frac{\partial \sigma}{\partial a^{(t)}} \left( \frac{\partial}{\partial I_{i,j}} { \left({e^{(t)}}^T I \right)}  + \frac{\partial }{\partial I_{i,j}} \left( {h^{(t-1)}}^T H \right) \right) \\
+\end{equation}
+
+Again a simple computation yields:
+\begin{equation}
+  \frac{\partial}{\partial I_{i,j}} { \left({e^{(t)}}^T I \right)} = e^{(t)}_i \cdot \textbf{\text{e}}_j
+\end{equation}
+
+Plugging this into (\ref{eq:grad_I_chainrule}), assuming $h^{(t-1)}$ is constant in $I$:
+\begin{equation} \label{eq:grad_I_ij}
+  \restr{\frac{\partial J^{(t)}}{\partial I_{i,j}}}{(t)}(\theta) = \left(\hat{y}^{(t)} - y^{(t)}\right)^T U^T \; \text{diag}\left[ h^{(t)} \right]  \text{diag}\left[ \vec{1} - h^{(t)} \right] e^{(t)}_i \cdot \textbf{\text{e}}_j
+\end{equation}
+
+Recognizing the above form as the outer product:
+\begin{equation} \label{eq:grad_I}
+  \boxed{ \restr{\frac{\partial J^{(t)}}{\partial I}}{(t)}(\theta) = e^{(t)} \otimes \left(\left(\hat{y}^{(t)} - y^{(t)}\right)^T U^T \; \text{diag}\left[ h^{(t)} \right]  \text{diag}\left[ \vec{1} - h^{(t)} \right] \right)^T }
+\end{equation}
+
+
+\subsubsection[short]{$ \frac{\partial J^{(t)}}{\partial H}(\theta) $}
+In a similar fashion to (\ref{eq:grad_L}), we apply the chain rule:
+\begin{equation} \label{eq:grad_H_chainrule}
+  \frac{\partial J^{(t)}}{\partial H_{i,j}}(\theta) = \frac{\partial J^{(t)}}{\partial \hat{y}_k^{(t)}} \frac{{\partial \hat{y}_k^{(t)}}}{\partial o_l^{(t)}} \frac{\partial o_l^{(t)}}{\partial h^{(t)}} \frac{\partial h^{(t)}}{\partial H_{i,j}} 
+\end{equation}
+
+Note that only the last term in (\ref{eq:grad_I}) differs from (\ref{eq:grad_L}), futhermore in a similar fashion to (\ref{eq:grad_h_by_L}):
+\begin{equation} \label{eq:grad_h_by_H}
+  \frac{\partial h^{(t)}}{\partial H_{i,j}} = \frac{\partial \sigma}{\partial a^{(t)}} \left(  \frac{\partial }{\partial H_{i,j}} \left( {h^{(t-1)}}^T H \right) \right) \\
+\end{equation}
+where 
+\begin{equation}
+  \frac{\partial }{\partial H_{i,j}} \left( {h^{(t-1)}}^T H \right) = H^T \left( \frac{\partial h^{(t-1)}}{\partial H_{i,j}} \right) \;+\; h^{(t-1)}_i \cdot \textbf{\text{e}}_j
+\end{equation}
+
+Focusing on the t-th appearence of $H$:
+\begin{equation}
+  \restr{\frac{\partial }{\partial H_{i,j}}}{(t)}\left( {h^{(t-1)}}^T H \right) = h^{(t-1)}_i \cdot \textbf{\text{e}}_j
+\end{equation}
+
+And in a similar fashion to (\ref{eq:grad_I})
+\begin{equation} \label{eq:grad_H}
+  \boxed{ \restr{\frac{\partial J^{(t)}}{\partial H}}{(t)}(\theta) = h^{(t-1)} \otimes \left(\left(\hat{y}^{(t)} - y^{(t)}\right)^T U^T \; \text{diag}\left[ h^{(t)} \right]  \text{diag}\left[ \vec{1} - h^{(t)} \right] \right)^T }
+\end{equation}
+
+
+
+\subsubsection[short]{$ \frac{\partial J^{(t)}}{\partial h^{(t-1)}}(\theta) $}
+
+In a similar fashion to (\ref{eq:grad_L}), we apply the chain rule:
+\begin{equation} \label{eq:grad_h_prev_chainrule}
+  \frac{\partial J^{(t)}}{\partial h^{(t-1)}}(\theta) = \frac{\partial J^{(t)}}{\partial \hat{y}_k^{(t)}} \frac{{\partial \hat{y}_k^{(t)}}}{\partial o_l^{(t)}} \frac{\partial o_l^{(t)}}{\partial h^{(t)}} \frac{\partial h^{(t)}}{\partial h^{(t-1)}} 
+\end{equation}
+
+where again only $\frac{\partial h^{(t)}}{\partial h^{(t-1)}}$ is yet to be computed, and is given by:
+\begin{equation} 
+  \frac{\partial h^{(t)}}{\partial h^{(t-1)}} = H^T
+\end{equation}
+
+Plugging this into (\ref{eq:grad_h_prev_chainrule}) yields:
+\begin{equation} \label{eq:grad_h_prev}
+  \boxed{ \frac{\partial J^{(t)}}{\partial h^{(t-1)}}(\theta) = \left(\hat{y}^{(t)} - y^{(t)}\right)^T U^T \; \text{diag}\left[ h^{(t)} \right]  \text{diag}\left[ \vec{1} - h^{(t)} \right] H^T }
+\end{equation}
