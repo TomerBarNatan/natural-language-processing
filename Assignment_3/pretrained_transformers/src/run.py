@@ -119,6 +119,7 @@ elif args.function == "finetune":
         final_tokens=200 * len(pretrain_dataset) * block_size,
         num_workers=4,
         writer=writer,
+        ckpt_path=args.writing_params_path
     )
     corruption_dataset = dataset.CharCorruptionDataset(
         open("wiki.txt", encoding="utf-8").read(), 128
