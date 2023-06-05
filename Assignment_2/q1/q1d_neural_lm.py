@@ -113,12 +113,12 @@ def eval_neural_lm(eval_data_path):
     while c_batch < num_of_examples:
         data = [num_to_word_embedding[in_word_index[i]]
                 for i in range(c_batch, min((c_batch+b_size), len(in_word_index)))]
-        labels = [int_to_one_hot(out_word_index[i], output_dim) for i in range(
+        label = [out_word_index[i] for i in range(
             c_batch, min((c_batch+b_size), len(in_word_index)))]
         c_batch += b_size
         data = np.stack(data, axis=0)
-        labels = np.stack(labels, axis=0)
-        y_hat = forward(data, labels, params, dimensions)
+        label = np.stack(label, axis=0)
+        y_hat = forward(data, label, params, dimensions)
         cost = (-1*np.log(y_hat)).mean()
         n_batches += 1
         perplexity += cost
@@ -148,12 +148,12 @@ def eval_neural_lm_tests(eval_data_path):
     while c_batch < num_of_examples:
         data = [num_to_word_embedding[in_word_index[i]]
                 for i in range(c_batch, min((c_batch+b_size), len(in_word_index)))]
-        labels = [int_to_one_hot(out_word_index[i], output_dim) for i in range(
+        label = [out_word_index[i] for i in range(
             c_batch, min((c_batch+b_size), len(in_word_index)))]
         c_batch += b_size
         data = np.stack(data, axis=0)
-        labels = np.stack(labels, axis=0)
-        y_hat = forward(data, labels, params, dimensions)
+        label = np.stack(label, axis=0)
+        y_hat = forward(data, label, params, dimensions)
         cost = (-1*np.log(y_hat)).mean()
         n_batches += 1
         perplexity += cost

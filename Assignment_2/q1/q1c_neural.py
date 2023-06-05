@@ -31,7 +31,7 @@ def forward(data, label, params, dimensions):
     data = sigmoid(data)
     data = data @ W2 + b2
     data = softmax(data)
-    return np.multiply(data, label).max(axis=1)
+    return data[list(range(data.shape[0])), label]
 
 
 
@@ -109,20 +109,21 @@ def your_sanity_checks():
     your additional tests be graded.
     """
     print("Running your sanity checks...")
-    N = 1
+    N = 20
     dimensions = [10, 5, 10]
     data = np.random.randn(N, dimensions[0])   # each row will be a datum
-    labels = np.zeros((N, dimensions[2]))
-    for i in range(N):
-        labels[i, random.randint(0, dimensions[2]-1)] = 1
+
+    label = np.random.randint(low=0, high=dimensions[2], size=(N,))
     
     params = np.random.randn((dimensions[0] + 1) * dimensions[1] + (
         dimensions[1] + 1) * dimensions[2], )
-    res = forward(data, labels, params, dimensions)
+    res = forward(data, label, params, dimensions)
     assert res.shape == (N, ), "The shape of the result is wrong"
     assert res.max() <= 1, "The result should be a probability"
     print("Your forward sanity checks passed!")
-    
+    labels = np.zeros((N, dimensions[2]))
+    for i in range(N):
+        labels[i, random.randint(0, dimensions[2]-1)] = 1
     cost, grad = forward_backward_prop(data, labels, params, dimensions)
     assert grad.shape == params.shape, "The shape of the gradient is wrong"
     print("Your backward sanity checks passed!")
