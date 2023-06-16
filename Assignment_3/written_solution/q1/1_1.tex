@@ -12,3 +12,9 @@ Whereas all other $k_i$ are almost in the opposite direction to $q$, i.e their a
 Assuming that some $k_j$ is parallel to $q$ and all other $k_i$ are in the opposite direction to $q$ we get that $k_j^Tq = 1$ and $k_i^Tq = -1$ for all $i \neq j$. \newline
 We get that $e^{k_j^Tq} = e^1 = e$ and $e^{k_i^Tq} = e^{-1} = \frac{1}{e}$. \newline
 We get that $\alpha_j=$
+
+
+
+(d) \newline
+This means that the output $c$ will depend almost only on the the single $v_j$ that corresponds to the $k_j$ that is parallel to $q$. 
+This is, obviously, not desirable since we want the output to be contextualized, i.e depend on the full sentence. Without this property the model will not be expressive enough.
