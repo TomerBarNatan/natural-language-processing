@@ -3,18 +3,14 @@
 # Hint: Make use of existing code.
 # Your solution here should only be a few lines.
 import argparse
-import torch 
+import torch
 import utils
 
-argp = argparse.ArgumentParser()
-argp.add_argument("--eval_corpus_path", default="birth_dev.tsv")
 
 if __name__ == "__main__":
-    args = argp.parse_args()
-
-    with open(args.eval_corpus_path, mode="r", encoding="utf-8") as f:
+    with open("birth_dev.tsv", mode="r", encoding="utf-8") as f:
         N = len(f.readlines())
-    
+
     predictions = ["London"] * N
     total, correct = utils.evaluate_places(args.eval_corpus_path, predictions)
     if total > 0:
