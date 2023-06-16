@@ -46,6 +46,7 @@ class NameDataset(Dataset):
         return x, y
 
 
+
 """
 [part e]
 
@@ -168,8 +169,26 @@ class CharCorruptionDataset(Dataset):
 
     def __getitem__(self, idx):
         # TODO [part e]: see spec above
-        raise NotImplementedError
-
+        inp = self.data[idx]
+        truncated_len = random.randint(4, int(self.block_size*7/8))
+        inp = inp[:truncated_len]
+        N = len(inp)
+        center = N/4
+        # we want the avg to be 1/4. Note that 3/4*1/8 + 1/4*5/8 = 1/4, where 1/8 is the avg of the length if it is lower then 1/4 and 5/8 the avg if it is higher than 1/4
+        mask_len = random.randint(0, int(center)) if random.random() < 0.75 else random.randint(int(center), N) 
+        mask_start = random.randint(0, N-mask_len)
+        mask_end = mask_start + mask_len
+        mask = inp[mask_start:mask_end]
+        prefix = inp[:mask_start]
+        suffix = inp[mask_end:]
+        masked_string = prefix + self.MASK_CHAR + suffix + self.MASK_CHAR + mask + self.MASK_CHAR
+        masked_string = masked_string + self.PAD_CHAR*(self.block_size - len(masked_string))
+        x = masked_string[:-1]
+        y = x[1:]
+        y = y + self.PAD_CHAR if len(y) < self.block_size else y 
+        x = torch.tensor([self.stoi[c] for c in x], dtype=torch.long)
+        y = torch.tensor([self.stoi[c] for c in y], dtype=torch.long)
+        return x, y
 """
 Code under here is strictly for your debugging purposes; feel free to modify
 as desired.

@@ -95,41 +95,29 @@ if args.function == "pretrain":
 
     # - Make sure to use the following hyperparameters for pretraining:
     # Hyperparameters for pretraining:
-    # max_epochs=650
-    # batch_size=128
-    # learning_rate=args.pretrain_lr
-    # lr_decay=True
-    # warmup_tokens=512*20
-    # final_tokens=200*len(pretrain_dataset)*block_size
-    # num_workers=4
-    # writer=writer
-    raise NotImplementedError
+
+    tconf = trainer.TrainerConfig(
+        max_epochs=650,
+        batch_size=128,
+        learning_rate=args.pretrain_lr,
+        lr_decay=True,
+        warmup_tokens=512 * 20,
+        final_tokens=200 * len(pretrain_dataset) * block_size,
+        num_workers=4,
+        writer=writer,
+        ckpt_path=args.writing_params_path,
+    )
+    corruption_dataset = dataset.CharCorruptionDataset(
+        open("wiki.txt", encoding="utf-8").read(), 128
+    )
+    trainer = trainer.Trainer(model, corruption_dataset, None, tconf)
+    trainer.train()
 elif args.function == "finetune":
     assert args.writing_params_path is not None
     assert args.finetune_corpus_path is not None
     # [part c]
     # initialize a trainer instance and kick off training
 
-    tconf = trainer.TrainerConfig(
-        max_epochs=75,
-        batch_size=256,
-        learning_rate=args.finetune_lr,
-        lr_decay=True,
-        warmup_tokens=512 * 20,
-        final_tokens=200 * len(pretrain_dataset) * block_size,
-        num_workers=4,
-        writer=writer,
-        ckpt_path=args.writing_params_path
-    )
-    corruption_dataset = dataset.CharCorruptionDataset(
-        open("wiki.txt", encoding="utf-8").read(), 128
-    )
-    # Make the name dataset
-    name_dataset = dataset.NameDataset(
-        corruption_dataset, open("birth_places_train.tsv", encoding="utf-8").read()
-    )
-    trainer = trainer.Trainer(model, name_dataset, None, tconf)
-    trainer.train()
     # [part f]:
     # - Given:
     #     1. A finetuning corpus specified in args.finetune_corpus_path
@@ -152,16 +140,40 @@ elif args.function == "finetune":
     #         num_workers=4
     #         writer=writer
     #     [part f] Hyperparameters for finetuning WITH a pretrained model:
-    #         max_epochs=10
-    #         batch_size=256
-    #         learning_rate=args.finetune_lr
-    #         lr_decay=True
-    #         warmup_tokens=512*20
-    #         final_tokens=200*len(pretrain_dataset)*block_size
-    #         num_workers=4
-    #         writer=writer
+    # max_epochs=10
+    # batch_size=256
+    # learning_rate=args.finetune_lr
+    # lr_decay=True
+    # warmup_tokens=512*20
+    # final_tokens=200*len(pretrain_dataset)*block_size
+    # num_workers=4
+    # writer=writer
     #     You can use the args.reading_params_path flag to switch between the
     #     number of epochs for each case.
+
+    if args.reading_params_path:
+        model.load_state_dict(torch.load(args.reading_params_path))
+
+    tconf = trainer.TrainerConfig(
+        max_epochs=75 if args.reading_params_path is None else 10,
+        batch_size=256,
+        learning_rate=args.finetune_lr,
+        lr_decay=True,
+        warmup_tokens=512 * 20,
+        final_tokens=200 * len(pretrain_dataset) * block_size,
+        num_workers=4,
+        writer=writer,
+        ckpt_path=args.writing_params_path,
+    )
+    corruption_dataset = dataset.CharCorruptionDataset(
+        open("wiki.txt", encoding="utf-8").read(), 128
+    )
+    # Make the name dataset
+    name_dataset = dataset.NameDataset(
+        corruption_dataset, open("birth_places_train.tsv", encoding="utf-8").read()
+    )
+    trainer = trainer.Trainer(model, name_dataset, None, tconf)
+    trainer.train()
 
 elif args.function == "evaluate":
     assert args.outputs_path is not None
