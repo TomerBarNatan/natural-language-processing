@@ -1,0 +1,21 @@
+\subsubsection*{(a)}
+Let us define the following matrix $M$:
+$$M=c_1 \frac{a_1 a_1^T}{a_1^T a_1} + c_2 \frac{a_2 a_2^T}{a_2^T a_2} + \dots + c_m \frac{a_m a_m^T}{a_m^T a_m}$$
+If we multiply $M$ by $a_i$ we get that 
+$$Ma_i = c_i a_i$$
+i.e, $a_i$ is an eigenvector of $M$ with eigenvalue $c_i$. That means that 
+$$Mv_a = M(a_1+ \dots + a_m) = Ma_1+ \dots + Ma_m=c_1a_1+ \dots +c_ma_m=v_a$$
+Plus, when multiplying $M$ by $v_b$ we get that
+$$Mv_b = c_1 \frac{a_1 a_1^T v_b}{a_1^T a_1} + c_2 \frac{a_2 a_2^T v_b}{a_2^T a_2} + \dots + c_m \frac{a_m a_m^T v_b}{a_m^T a_m}$$
+we know that $a_i^T v_b = 0$ for all $i$ since 
+$$a_i^T v_b = a_i^T b_1 + ... + a_i^T b_m = 0$$
+which is true because the two basis are supposed to be orthogonal. Hence
+$$Mv_b = 0$$
+Hence we finally get that $$Ms=Mv_a+Mv_b=v_a$$ \newline
+\subsubsection*{(b)}
+we define $q$ as follows:
+$$q = \frac{k_a + k_b}{2}*2H$$ where $H$ is some Huge number. It holds that 
+$$k_a q = k_b q = H$$
+Plus, it holds that 
+$$ k_i q = 0 $$ if $i \neq a,b$. We get that $\alpha_a = \alpha_b = \frac{e^H}{n-2 + 2e^H}$ and $\alpha_i=\frac{1}{n-2 + 2e^H}$ for $i \neq a,b$. \newline
+For large enough $H$ we get that $\alpha_a \approx \alpha_b \approx \frac{1}{2}$ and $\alpha_i \approx 0$ for $i \neq a,b$. Hence $c \approx \frac{1}{2}(v_a + v_b)$

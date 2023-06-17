@@ -1,20 +1,16 @@
-(a) \newline
+\subsubsection*{(a)}
 Let us note that due to the formula that defines each $\alpha_i$ the sum of all $\alpha_i$ is 1. 
 Hence, by looking at each value as category we easily get that this is a categorical distribution. \newline
-(b) \newline
-this would happen if \newline 
-1. there exists some $k_j$ where $k_j^Tq$ is large and \newline
-2. for all other $k_i$ where $i \neq j$ $k_i^Tq$ is small. \newline
-Let us remember that $a^Tb = |a||b|cos(\theta)$ where $\theta$ is the angle between $a$ and $b$. Lets us assume for simplicity sake that $|q| = 1$ and $|k_j| = 1$ for all $j$. \newline
-Then, for the two conditions above to hold we need that $q$ and some single $k_j$ are almost parallel, i.e their angle is small on the unit circle. 
-Whereas all other $k_i$ are almost in the opposite direction to $q$, i.e their angle with $q$ is large on the unit circle. \newline
-(c) \newline
-Assuming that some $k_j$ is parallel to $q$ and all other $k_i$ are in the opposite direction to $q$ we get that $k_j^Tq = 1$ and $k_i^Tq = -1$ for all $i \neq j$. \newline
-We get that $e^{k_j^Tq} = e^1 = e$ and $e^{k_i^Tq} = e^{-1} = \frac{1}{e}$. \newline
-We get that $\alpha_j=$
-
-
-
-(d) \newline
-This means that the output $c$ will depend almost only on the the single $v_j$ that corresponds to the $k_j$ that is parallel to $q$. 
+\subsubsection*{(b)}
+This would happen if 
+\begin{enumerate}
+    \item there exists some $k_j$ where $k_j^Tq$ is large and
+    \item for all other $k_i$ where $i \neq j$ $k_i^Tq$ is small.
+\end{enumerate} 
+Let us remember that $a^Tb = |a||b|\cos(\theta)$ where $\theta$ is the angle between $a$ and $b$. Hence for the conditions above to hold we need that $k_j$ is parallel to $q$ and all other $k_i$ are in the opposite direction to $q$. \newline
+Plus, we need that either $q$ is very large (i.e large norm) or that $k_j$ is very large or that the other $k_i$ vectors norm is very large. \newline
+\subsubsection*{(c)}
+Assuming that the conditions above are correct, we get that $c \approx v_j$ \newline
+\subsubsection*{(d)}
+This means that the output $c$ will depend almost only on a single $v_j$ that corresponds to the $k_j$ that is parallel to $q$. 
 This is, obviously, not desirable since we want the output to be contextualized, i.e depend on the full sentence. Without this property the model will not be expressive enough.
