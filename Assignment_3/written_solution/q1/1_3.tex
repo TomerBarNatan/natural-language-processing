@@ -1,0 +1,15 @@
+\subsubsection*{(a)}
+Let us note that for $k_i \sim N(\mu_i, \alpha_i I)$ we can rewrite $k_i$ as $k_i = \mu_i + \sigma_i$ where $\sigma_i \sim N(0, \alpha_i I)$. Similarly to the clause before we define
+$$q=(\mu_a+\mu_b)H$$
+we get that for $k_a=\mu_a+\sigma_a$
+$$(\mu_a+sigma_a)(\mu_a+\mu_b)H=H(1+\sigma_a(\mu_a+\mu_b)) \approx H$$
+and similarly for $k_b$. For $k_i$ where $i \neq a,b$ we get that
+\[(\mu_i+\sigma_i)(\mu_a+\mu_b)H=\sigma_i(\mu_a+\mu_b)H \approx 0\]
+Hence we get similarly to the previous clause that $c \approx \frac{1}{2}(v_a+v_b)$
+\subsubsection*{(b)}
+We get that 
+$$k_a q = (\mu_a+\sigma_a)(\mu_a+\mu_b)H \approx H(1 \pm ||\sigma_a||)$$
+Let us note that $||\sigma_a||$ flactuates from $0$ to $\frac{1}{2} ||\mu_a||=\frac{1}{2}$. \newline    
+Hence, for different samples, we can see that the value of $k_a q$ flactuates from $1.5H$ to $\frac{H}{2}$. Hence we get that $\alpha_a$ flactuates from being equal to $\alpha_b * e^{0.5H}$ to being equal to $\alpha_b * e^{-0.5H}$. \newline
+Let us remind our selves that $\alpha_a, \alpha_b < 1$ and that $H$ is a huge number. We that if $\alpha_a = \alpha_b * e^{0.5H}$ then $\alpha_a \approx 1$ and $\alpha_b \approx 0$. Similarly, if $\alpha_a = \alpha_b * e^{-0.5H}$ then $\alpha_a \approx 0$ and $\alpha_b \approx 1$. \newline
+Hence, the expectation is $E[c] \approx \frac{1}{2}(v_a + v_b)$ but $c$ flactuates from $c \approx v_a$ to $c \approx v_b$.
