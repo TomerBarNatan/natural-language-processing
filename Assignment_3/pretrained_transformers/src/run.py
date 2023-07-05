@@ -76,6 +76,7 @@ if args.variant == "vanilla":
     # [part c] Make some model here
 
     model = model.GPT(mconf)
+    model.to(device)
 elif args.variant == "perceiver":
     # set mconf.perceiver, and mconf.bottleneck_dim parameters appropriately.
     pass  # [part g] Make some other model here
@@ -182,7 +183,6 @@ elif args.function == "evaluate":
     model.load_state_dict(torch.load(args.reading_params_path))
     correct = 0
     total = 0
-    model.to(device)
     with open(args.outputs_path, "w", encoding="utf-8") as fout:
         predictions = []
         for line in tqdm(open(args.eval_corpus_path, encoding="utf-8")):
