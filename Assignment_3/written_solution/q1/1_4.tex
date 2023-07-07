@@ -1,8 +1,32 @@
 \subsubsection*{(a)}
-We define $q_1=q_2=(\mu_a + \mu_b)H$. Due to the analysis in previous clauses we know that both $c_1,c_2$ are equal to $\frac{1}{2}(v_a+v_b)$ under this definition of $q_1,q_2$. \newline
-Hence, their average is also equal to $\frac{1}{2}(v_a+v_b)$.
+% We define $q_1=q_2=(\mu_a + \mu_b)H$. Due to the analysis in previous clauses we know that both $c_1,c_2$ are equal to $\frac{1}{2}(v_a+v_b)$ under this definition of $q_1,q_2$. \newline
+% Hence, their average is also equal to $\frac{1}{2}(v_a+v_b)$.
+As in previous sections, we can design queries that copy a single mean vector. We define express the queries as:
+    
+$$ q_1=H \mu_a,\quad q_2=H \mu_b,\quad \text{for some large} H$$
+
+Since the means are orthogonal we have:
+
+$$ c_1\approx v_a;\quad c_2\approx v_b$$
+
+And since multiheaded attention is just an average of the 2 values, we can see that:
+
+$$ c\approx\frac{1}{2}(v_a+v_b)$$
+
 \subsubsection*{(b)}
-Let us denote the value $c$ that we've gotten in clause 1.3b by $c^*$. We've seen that $E[c^*]=\frac{1}{2}(v_a+v_b)$ with some variance we denote by $\sigma^*$. 
-Let us note that $c_1,c_2$ are equal to $c^*$ (under the same sampling, of course, as they are random variables). Hence, we get that $E[c_1]=E[c_2]=\frac{1}{2}(v_a+v_b)$ and that $Var[c_1]=Var[c_2]=\sigma^*$. \newline
-Our $c$ is equal to $\frac{1}{2}(c_1+c_2)$. Hence, we get that $E[c]=\frac{1}{2}(E[c_1]+E[c_2])=\frac{1}{2}(v_a+v_b)$ and that $Var[c]=\frac{1}{4}(Var[c_1]+Var[c_2])=\frac{1}{2}\sigma^*$. \newline
-We've been able to keep the same expectation and reduce the variance by a factor of $2$, using multi-head attention. 
+% Let us denote the value $c$ that we've gotten in clause 1.3b by $c^*$. We've seen that $E[c^*]=\frac{1}{2}(v_a+v_b)$ with some variance we denote by $\sigma^*$. 
+% Let us note that $c_1,c_2$ are equal to $c^*$ (under the same sampling, of course, as they are random variables). Hence, we get that $E[c_1]=E[c_2]=\frac{1}{2}(v_a+v_b)$ and that $Var[c_1]=Var[c_2]=\sigma^*$. \newline
+% Our $c$ is equal to $\frac{1}{2}(c_1+c_2)$. Hence, we get that $E[c]=\frac{1}{2}(E[c_1]+E[c_2])=\frac{1}{2}(v_a+v_b)$ and that $Var[c]=\frac{1}{4}(Var[c_1]+Var[c_2])=\frac{1}{2}\sigma^*$. \newline
+% We've been able to keep the same expectation and reduce the variance by a factor of $2$, using multi-head attention. 
+
+By the assumptions made in the question it holds that:
+
+$$ k_a^Tq_1 = \gamma \mu_a^TH\mu_a = \gamma H \quad \text{where } \gamma \sim \mathcal{N}\left(1, 0.5\right) $$
+$$ k_b^Tq_2 = \gamma \mu_b^TH\mu_b = H $$
+
+Again, since all other key-value products are insignificant with regards to $H$ the softmax approaches the maximum:
+$$ \alpha^1_a \approx 1, \quad \alpha^2_b \approx 1 $$
+
+so by definition the final output approximates the average:
+
+$$ c \approx \frac{1}{2}\left(v_a + v_b\right)$$
