@@ -11,6 +11,7 @@
 \usepackage{mymacros}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{mathtools}
 \usepackage[shortlabels]{enumitem}
 \usepackage[noabbrev, capitalise]{cleveref}
 
@@ -24,13 +25,13 @@
  }
 
 % define your IDs here:
-\newcommand{\firststudentid}{318635646}
-\newcommand{\secondstudentid}{987654321}
-\newcommand{\thirdstudentid}{987654321}
+\newcommand{\firststudentid}{205679863}
+\newcommand{\secondstudentid}{311151138}
+\newcommand{\thirdstudentid}{318635646}
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Written Solution for Assignment 1}
+\rhead{Solution for Assignment 3}
 \chead{\firststudentid \qquad \secondstudentid \qquad \thirdstudentid}
 \lhead{Natural Language Processing}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
@@ -45,7 +46,7 @@
 
 \begin{document}
 
-\section{ }
+\section{Attention Exploration}
 \subsection*{1.1}
 \input{q1/1_1.tex}
 
@@ -69,7 +70,7 @@
 % \subsection{}
 % \input{q1/1_f.tex}
 
-\section{ }
+\section{Pretrained Transformers}
 \setcounter{subsection}{3}
 \subsection{}
 \input{q2/2_4.tex}
@@ -79,23 +80,22 @@
 \subsection{}
 \input{q2/2_7.tex}
 
-\section{}
-\subsection{}
+\section{In-Context Learning}
+\subsection*{3.1.b}
 \input{q3/3_1b.tex}
-\subsection{}
+\subsection*{3.2.b}
 \input{q3/3_2b.tex}
-\subsection{}
+\subsection*{3.3}
 \input{q3/3_3b.tex}
-% \subsection{}
-% \input{q3/3_a}
-% \subsection{}
-% \input{q3/3_b}
 
-% \section{}
-% \subsection{}
-% \input{q4/4_a}
-% \subsection{}
-% \input{q4/4_b}
+\section{Chain-of-Thoughts and Self-Consistency}
+\subsection{}
+\input{q4/4_a}
+\subsection{}
+\input{q4/4_b}
+\subsection{}
+\input{q4/4_c}
+
 \newpage
 \bibliography{main}
 \bibliographystyle{abbrv}
